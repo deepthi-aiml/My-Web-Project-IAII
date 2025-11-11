@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute of Artificial Intelligence & Innovation - Sri Lanka</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Variables */
+        :root {
+            --primary: #1a237e;
+            --primary-light: #534bae;
+            --primary-dark: #000051;
+            --secondary: #00b0ff;
+            --secondary-light: #69e2ff;
+            --secondary-dark: #0081cb;
+            --accent: #ff5722;
+            --text-light: #f5f5f5;
+            --text-dark: #212121;
+            --gray-light: #e0e0e0;
+            --gray: #9e9e9e;
+            --gray-dark: #424242;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-free {
+            background-color: var(--success);
+        }
+
+        .btn-free:hover {
+            background-color: #3d8b40;
+        }
+
+        .section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray-dark);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 5px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo .tagline {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 35, 126, 0.85), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 200px 0 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2300b0ff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-30px); }
+            100% { transform: translateX(0); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray-dark);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px 15px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            color: var(--gray-dark);
+            font-weight: 500;
+        }
+
+        /* Programs Section */
+        .programs {
+            background-color: #f5f7fa;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .program-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .program-card:hover .program-img img {
+            transform: scale(1.1);
+        }
+
+        .program-content {
+            padding: 25px;
+        }
+
+        .program-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .program-content p {
+            color: var(--gray-dark);
+            margin-bottom: 20px;
+        }
+
+        .program-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .program-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-free {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .badge-popular {
+            background-color: rgba(255, 152, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .badge-new {
+            background-color: rgba(0, 176, 255, 0.1);
+            color: var(--secondary);
+        }
+
+        /* Course Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1100;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            max-width: 800px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .syllabus-section {
+            margin-bottom: 30px;
+        }
+
+        .syllabus-section h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .syllabus-list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .syllabus-list li {
+            margin-bottom: 8px;
+            color: var(--gray-dark);
+        }
+
+        /* Free Courses Section */
+        .free-courses {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .free-courses .section-title h2,
+        .free-courses .section-title p {
+            color: white;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-light);
+        }
+
+        .course-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .course-card p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        /* Career Roadmaps Section */
+        .roadmap-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .roadmap-content {
+            display: none;
+        }
+
+        .roadmap-content.active {
+            display: block;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--secondary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: 20px 0;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid white;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -10px;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: var(--gray-dark);
+            margin-bottom: 10px;
+        }
+
+        .timeline-duration {
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Research Section */
+        .research-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-btn.active {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 176, 255, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .research-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 15px;
+            background-color: rgba(0, 176, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .research-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* AI Ethics Grid */
+        .ethics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Faculty Section */
+        .faculty {
+            background-color: #f5f7fa;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .faculty-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .faculty-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .faculty-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .faculty-card:hover .faculty-img img {
+            transform: scale(1.05);
+        }
+
+        .faculty-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .faculty-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .faculty-info p {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .faculty-info .faculty-desc {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .news-card:hover .news-img img {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-date i {
+            margin-right: 5px;
+            color: var(--secondary);
+        }
+
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .news-content p {
+            color: var(--gray-dark);
+            margin-bottom: 15px;
+        }
+
+        .news-link {
+            color: var(--secondary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .news-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .news-link:hover {
+            color: var(--secondary-dark);
+        }
+
+        .news-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f5f7fa;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--gray-dark);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            background-color: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            background-color: var(--primary);
+            transform: rotate(15deg);
+        }
+
+        .contact-text h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 176, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 70px 0 0;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-col p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-footer a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-footer a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .countdown h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            min-width: 100px;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 70px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-marker,
+            .timeline-item:nth-child(even) .timeline-marker {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -10px;
+                border-right: 10px solid white;
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero {
+                padding: 150px 0 100px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .research-tabs,
+            .roadmap-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                margin: 20px auto;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <!-- AI-themed logo -->
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjgiIGZpbGw9IiMxYTIzN2UiLz4KPHBhdGggZD0iTTMwIDE1VjQ1TTE1IDMwSDQ1TTIyIDIyTDM4IDM4TTM4IDIyTDIyIDM4IiBzdHJva2U9IiMwMGIwZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjUiIGZpbGw9IiMwMGIwZmYiLz4KPC9zdmc+" alt="IAII Logo">
+                <div class="logo-text">
+                    <h1>Institute of AI & Innovation</h1>
+                    <span class="tagline">Pioneering AI Research in Sri Lanka</span>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#free-courses">Free Courses</a></li>
+                    <li><a href="#roadmaps">Career Roadmaps</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#faculty">Faculty</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="btn">Apply Now</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Shaping Sri Lanka's Future with Artificial Intelligence</h1>
+            <p>Launching in 2026, the Institute of Artificial Intelligence & Innovation will pioneer cutting-edge AI research and education to drive innovation and economic growth in Sri Lanka.</p>
+            <div class="hero-btns">
+                <a href="#programs" class="btn">Explore Programs</a>
+                <a href="#free-courses" class="btn btn-outline">Free Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown">
+        <div class="container">
+            <h2>Launching in 2026</h2>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">365</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">24</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">60</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">60</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About IAII Sri Lanka</h2>
+                <p>The Institute of Artificial Intelligence & Innovation will be Sri Lanka's premier center for AI research, education, and innovation, driving technological advancement and economic growth.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Pioneering AI Excellence in South Asia</h3>
+                    <p>Launching in 2026, the Institute of Artificial Intelligence & Innovation will establish Sri Lanka as a regional hub for cutting-edge AI research and development. Our interdisciplinary approach will bring together computer science, engineering, ethics, and domain expertise to solve complex challenges.</p>
+                    <p>We are committed to developing AI technologies that benefit Sri Lankan society while addressing the ethical implications of these powerful tools. Our graduates will become leaders in industry, academia, and public service, driving innovation across the country.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-text">Research Labs</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50</div>
+                        <div class="stat-text">Faculty Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-text">Students</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section programs" id="programs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Academic Programs</h2>
+                <p>Our comprehensive curriculum will prepare students for leadership roles in AI research, development, and implementation across various industries.</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-img">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Machine Learning">
+                    </div>
+                    <div class="program-content">
+                        <div class="program-badges">
+                            <span class="badge badge-popular">Most Popular</span>
+                        </div>
+                        <h3>BSc in AI and Data Science</h3>
+                        <p>Comprehensive undergraduate program covering fundamentals of AI, machine learning, data analysis, and their real-world applications.</p>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 4 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Full-time</span>
+                        </div>
+                        <a href="#" class="btn view-syllabus" data-course="bsc-ai-data-science">View Syllabus</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-img">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Machine Learning">
+                    </div>
+                    <div class="program-content">
+                        <h3>MSc in Machine Learning</h3>
+                        <p>Deep dive into the algorithms and mathematics behind modern machine learning systems with applications tailored to Sri Lankan industries.</p>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 2 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Full-time</span>
+                        </div>
+                        <a href="#" class="btn view-syllabus" data-course="msc-machine-learning">View Syllabus</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-img">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Robotics">
+                    </div>
+                    <div class="program-content">
+                        <h3>PhD in Robotics & AI</h3>
+                        <p>Research-focused program exploring the intersection of artificial intelligence and robotics with applications in agriculture, manufacturing, and healthcare.</p>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 4-5 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Full-time</span>
+                        </div>
+                        <a href="#" class="btn view-syllabus" data-course="phd-robotics-ai">View Syllabus</a>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-img">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="AI Ethics">
+                    </div>
+                    <div class="program-content">
+                        <div class="program-badges">
+                            <span class="badge badge-new">New Program</span>
+                        </div>
+                        <h3>MA in AI Ethics & Policy</h3>
+                        <p>Examine the societal impacts of AI and develop frameworks for responsible deployment in the Sri Lankan context.</p>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 2.5 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Full/Part-time</span>
+                        </div>
+                        <a href="#" class="btn view-syllabus" data-course="ma-ai-ethics">View Syllabus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Courses Section -->
+    <section class="section free-courses" id="free-courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Free AI Courses</h2>
+                <p>Access our collection of free courses to start your journey in artificial intelligence and data science.</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Fundamentals</h3>
+                    <p>Learn the basics of artificial intelligence, machine learning, and their real-world applications in this beginner-friendly course.</p>
+                    <a href="#" class="btn btn-free">Enroll Free</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Data Science Essentials</h3>
+                    <p>Master the fundamentals of data analysis, visualization, and statistical modeling using Python and popular libraries.</p>
+                    <a href="#" class="btn btn-free">Enroll Free</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>AI for Sustainability</h3>
+                    <p>Explore how AI can address environmental challenges, from climate modeling to sustainable agriculture and energy optimization.</p>
+                    <a href="#" class="btn btn-free">Enroll Free</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Python for AI</h3>
+                    <p>Build a strong foundation in Python programming with focus on libraries and techniques used in AI development.</p>
+                    <a href="#" class="btn btn-free">Enroll Free</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Neural Networks</h3>
+                    <p>Dive deep into neural network architectures, training techniques, and applications in computer vision and NLP.</p>
+                    <a href="#" class="btn btn-free">Enroll Free</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>AI Ethics & Society</h3>
+                    <p>Understand the ethical implications of AI systems and learn to develop responsible AI solutions.</p>
+                    <a href="#" class="btn btn-free">Enroll Free</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Roadmaps Section -->
+    <section class="section" id="roadmaps">
+        <div class="container">
+            <div class="section-title">
+                <h2>AI Career Roadmaps</h2>
+                <p>Follow our structured learning paths to build a successful career in artificial intelligence.</p>
+            </div>
+            
+            <div class="roadmap-tabs">
+                <button class="tab-btn active" data-tab="roadmap1">AI Developer</button>
+                <button class="tab-btn" data-tab="roadmap2">AI Engineer</button>
+                <button class="tab-btn" data-tab="roadmap3">Why AI Engineering?</button>
+            </div>
+            
+            <!-- AI Developer Roadmap -->
+            <div class="roadmap-content active" id="roadmap1">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Foundation (Months 1-3)</h4>
+                            <p>Learn Python programming, data structures, and basic algorithms</p>
+                            <div class="timeline-duration">3 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Data Science Fundamentals (Months 4-6)</h4>
+                            <p>Master data analysis with Pandas, visualization with Matplotlib/Seaborn, and basic statistics</p>
+                            <div class="timeline-duration">3 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Machine Learning (Months 7-9)</h4>
+                            <p>Learn supervised and unsupervised learning algorithms with Scikit-learn</p>
+                            <div class="timeline-duration">3 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Deep Learning (Months 10-12)</h4>
+                            <p>Introduction to neural networks, TensorFlow/PyTorch, and computer vision/NLP basics</p>
+                            <div class="timeline-duration">3 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Projects & Portfolio (Months 13-15)</h4>
+                            <p>Build real-world projects, contribute to open source, and prepare for job applications</p>
+                            <div class="timeline-duration">3 months</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Engineer Roadmap -->
+            <div class="roadmap-content" id="roadmap2">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Software Engineering Foundation (Months 1-4)</h4>
+                            <p>Advanced Python, software design patterns, version control, and testing</p>
+                            <div class="timeline-duration">4 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>MLOps & Deployment (Months 5-8)</h4>
+                            <p>Model deployment, Docker, Kubernetes, CI/CD pipelines, and cloud platforms</p>
+                            <div class="timeline-duration">4 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Advanced ML Systems (Months 9-12)</h4>
+                            <p>Distributed training, model optimization, monitoring, and scalable architecture</p>
+                            <div class="timeline-duration">4 months</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Specialization & Production (Months 13-18)</h4>
+                            <p>Choose specialization (NLP, CV, etc.), build production systems, and lead projects</p>
+                            <div class="timeline-duration">6 months</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Why AI Engineering -->
+            <div class="roadmap-content" id="roadmap3">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Why Become an AI Engineer?</h3>
+                        <p>AI Engineering is one of the fastest-growing and highest-paying careers in technology. As businesses across all industries adopt AI solutions, the demand for skilled professionals who can build, deploy, and maintain these systems continues to skyrocket.</p>
+                        
+                        <h4>Key Benefits:</h4>
+                        <ul class="syllabus-list">
+                            <li><strong>High Demand:</strong> AI engineers are among the most sought-after tech professionals globally</li>
+                            <li><strong>Competitive Salaries:</strong> Average salaries range from $120,000 to $250,000+ depending on experience</li>
+                            <li><strong>Impactful Work:</strong> Solve complex problems and create solutions that transform industries</li>
+                            <li><strong>Continuous Learning:</strong> Work with cutting-edge technologies in a rapidly evolving field</li>
+                            <li><strong>Global Opportunities:</strong> Skills are transferable across industries and geographical locations</li>
+                        </ul>
+                        
+                        <h4>Career Paths:</h4>
+                        <p>AI engineers can specialize in various domains including natural language processing, computer vision, robotics, healthcare AI, fintech, and more. The skills are applicable across tech companies, research institutions, startups, and traditional industries undergoing digital transformation.</p>
+                        
+                        <a href="#free-courses" class="btn">Start Learning Today</a>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">40%</div>
+                            <div class="stat-text">Job Growth by 2027</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$146,000</div>
+                            <div class="stat-text">Average Salary</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">85%</div>
+                            <div class="stat-text">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="section" id="research">
+        <div class="container">
+            <div class="section-title">
+                <h2>Research Areas</h2>
+                <p>Our faculty and students will push the boundaries of AI across multiple domains with applications tailored to Sri Lanka's unique challenges.</p>
+            </div>
+            <div class="research-tabs">
+                <button class="tab-btn active" data-tab="tab1">AI for Agriculture</button>
+                <button class="tab-btn" data-tab="tab2">Healthcare AI</button>
+                <button class="tab-btn" data-tab="tab3">Natural Language</button>
+                <button class="tab-btn" data-tab="tab4">AI Ethics</button>
+            </div>
+            
+            <!-- AI for Agriculture -->
+            <div class="tab-content active" id="tab1">
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Precision Agriculture</h3>
+                        <p>Developing AI systems to optimize crop yields, monitor soil health, and predict weather patterns for Sri Lankan farmers.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h3>Automated Farming</h3>
+                        <p>Creating intelligent systems for automated planting, harvesting, and pest control tailored to local conditions.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Crop Disease Detection</h3>
+                        <p>Advancing computer vision algorithms for early detection of plant diseases in Sri Lanka's key agricultural products.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Healthcare AI -->
+            <div class="tab-content" id="tab2">
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Medical Diagnostics</h3>
+                        <p>Building AI systems to assist healthcare professionals in diagnosing diseases from medical images and patient data.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3>Drug Discovery</h3>
+                        <p>Using machine learning to accelerate the discovery of new treatments for diseases prevalent in Sri Lanka.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3>Telemedicine</h3>
+                        <p>Developing AI-powered platforms to expand healthcare access to rural communities across Sri Lanka.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Natural Language -->
+            <div class="tab-content" id="tab3">
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>AI Virtual Assistants</h3>
+                        <p>Building AI Chatbots using NLP to understand customer queries in natural language and provide intelligent responses.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Document Processing & Automation</h3>
+                        <p>Using machine learning to automate document processing, classification, and information extraction from various formats.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>Sinhala & Tamil NLP</h3>
+                        <p>Developing advanced natural language processing capabilities for Sri Lanka's official languages to bridge the digital divide.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Conversational AI</h3>
+                        <p>Creating sophisticated dialogue systems that can engage in meaningful, context-aware conversations with users.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Ethics -->
+            <div class="tab-content" id="tab4">
+                <div class="ethics-grid">
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>Fairness and Bias</h3>
+                        <p>Ensuring AI systems do not create or perpetuate unfair prejudice and discrimination against individuals or groups, particularly those based on race, gender, age, or disability.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Transparency and Explainability</h3>
+                        <p>The ability to understand and trust the decision-making process of an AI system. It's often called the "black box" problem—we shouldn't have to blindly trust an AI's output.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Accountability and Responsibility</h3>
+                        <p>Clearly defining who is responsible when an AI system causes harm, makes an error, or operates in an unintended way. This is often referred to as "liability."</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>Privacy</h3>
+                        <p>Protecting individuals' personal data from unauthorized access, use, or disclosure by AI systems, and ensuring data collection is consensual and limited.</p>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Safety and Reliability</h3>
+                        <p>Ensuring AI systems operate safely, securely, and robustly under all intended conditions and are resilient against both unintended mistakes and malicious attacks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="section faculty" id="faculty">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Leadership</h2>
+                <p>Meet the distinguished researchers and educators who are establishing the Institute of Artificial Intelligence & Innovation.</p>
+            </div>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Dr. Sanjaya Perera">
+                    </div>
+                    <div class="faculty-info">
+                        <h3>Dr. Sanjaya Perera</h3>
+                        <p>Founding Director</p>
+                        <p class="faculty-desc">Former AI Research Lead at Google, with expertise in deep learning and its applications to South Asian contexts.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="Dr. Nimali Fernando">
+                    </div>
+                    <div class="faculty-info">
+                        <h3>Dr. Nimali Fernando</h3>
+                        <p>Head of AI Ethics</p>
+                        <p class="faculty-desc">Expert in algorithmic fairness, transparency, and the societal impacts of AI in developing economies.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Dr. Rajiv Silva">
+                    </div>
+                    <div class="faculty-info">
+                        <h3>Dr. Rajiv Silva</h3>
+                        <p>Head of Robotics</p>
+                        <p class="faculty-desc">Pioneering work in autonomous systems and human-robot collaboration for manufacturing and agriculture.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="section" id="news">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Updates</h2>
+                <p>Stay informed about our progress as we establish Sri Lanka's premier AI research institute.</p>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Campus Construction">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar"></i> August 15, 2025</div>
+                        <h3>Campus Construction Begins</h3>
+                        <p>Groundbreaking ceremony marks the start of construction for our state-of-the-art campus in Colombo.</p>
+                        <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Partnership">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar"></i> July 28, 2025</div>
+                        <h3>International Partnerships Formed</h3>
+                        <p>IAII establishes research collaborations with leading AI institutions in Singapore, Japan, and Germany.</p>
+                        <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Research Grant">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar"></i> June 10, 2025</div>
+                        <h3>Major Research Grant Awarded</h3>
+                        <p>IAII receives $5M grant from Global Tech Foundation for AI research in sustainable agriculture.</p>
+                        <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for more information about our programs, research, or partnership opportunities.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>We welcome inquiries from prospective students, researchers, and organizations interested in collaboration.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Address</h4>
+                                <p>No.87, Park Road, Colombo 00500, Sri Lanka</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+94 (0) 76 207 9963</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@iaii.lk</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-footer">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>IAII Sri Lanka</h3>
+                    <p>The Institute of Artificial Intelligence & Innovation is dedicated to advancing AI research and education for the benefit of Sri Lankan society.</p>
+                    <div class="social-footer">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#free-courses">Free Courses</a></li>
+                        <li><a href="#roadmaps">Career Roadmaps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">BSc in AI and Data Science</a></li>
+                        <li><a href="#">MSc in Machine Learning</a></li>
+                        <li><a href="#">PhD in Robotics & AI</a></li>
+                        <li><a href="#">MA in AI Ethics & Policy</a></li>
+                        <li><a href="#">Professional Certificates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> No.87, Park Road, Colombo 00500, Sri Lanka</li>
+                        <li><i class="fas fa-phone"></i> +94 (0) 76 207 9963</li>
+                        <li><i class="fas fa-envelope"></i> info@iaii.lk</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Institute of Artificial Intelligence & Innovation Sri Lanka. All rights reserved. Launching in 2026.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Course Syllabus Modals -->
+    <div class="modal" id="syllabusModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Course Syllabus</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Syllabus content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Tab Functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const roadmapContents = document.querySelectorAll('.roadmap-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabType = btn.closest('.research-tabs') ? 'research' : 'roadmap';
+                
+                if (tabType === 'research') {
+                    // Remove active class from all research buttons and contents
+                    document.querySelectorAll('.research-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                } else {
+                    // Remove active class from all roadmap buttons and contents
+                    document.querySelectorAll('.roadmap-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+                    roadmapContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real application, you would send this data to a server
+            // For demo purposes, we'll just show an alert
+            alert(`Thank you, ${name}! Your message has been received. We'll get back to you soon.`);
+            
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('.section');
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('January 2, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = launchDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Course Syllabus Modal
+        const syllabusModal = document.getElementById('syllabusModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.querySelector('.close-modal');
+        const viewSyllabusBtns = document.querySelectorAll('.view-syllabus');
+
+        // Course syllabus data
+        const courseSyllabus = {
+            'bsc-ai-data-science': {
+                title: 'BSc in AI and Data Science - Syllabus',
+                content: `
+                    <div class="syllabus-section">
+                        <h4>Year 1: Foundation</h4>
+                        <ul class="syllabus-list">
+                            <li>Introduction to Programming (Python)</li>
+                            <li>Mathematics for AI (Calculus, Linear Algebra)</li>
+                            <li>Discrete Mathematics</li>
+                            <li>Introduction to Data Science</li>
+                            <li>Computer Systems and Architecture</li>
+                            <li>Communication Skills</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Year 2: Core Concepts</h4>
+                        <ul class="syllabus-list">
+                            <li>Data Structures and Algorithms</li>
+                            <li>Probability and Statistics</li>
+                            <li>Database Systems</li>
+                            <li>Machine Learning Fundamentals</li>
+                            <li>Data Visualization</li>
+                            <li>Software Engineering Principles</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Year 3: Advanced Topics</h4>
+                        <ul class="syllabus-list">
+                            <li>Deep Learning and Neural Networks</li>
+                            <li>Natural Language Processing</li>
+                            <li>Computer Vision</li>
+                            <li>Big Data Technologies</li>
+                            <li>AI Ethics and Society</li>
+                            <li>Cloud Computing for AI</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Year 4: Specialization & Capstone</h4>
+                        <ul class="syllabus-list">
+                            <li>Advanced Machine Learning</li>
+                            <li>Reinforcement Learning</li>
+                            <li>AI System Design</li>
+                            <li>Industry Internship</li>
+                            <li>Capstone Project</li>
+                            <li>Professional Development</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'msc-machine-learning': {
+                title: 'MSc in Machine Learning - Syllabus',
+                content: `
+                    <div class="syllabus-section">
+                        <h4>Core Modules</h4>
+                        <ul class="syllabus-list">
+                            <li>Advanced Machine Learning Algorithms</li>
+                            <li>Deep Learning Architectures</li>
+                            <li>Probabilistic Graphical Models</li>
+                            <li>Reinforcement Learning</li>
+                            <li>Natural Language Processing</li>
+                            <li>Computer Vision and Image Processing</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Technical Modules</h4>
+                        <ul class="syllabus-list">
+                            <li>Big Data Analytics</li>
+                            <li>Distributed Systems for ML</li>
+                            <li>MLOps and Model Deployment</li>
+                            <li>Cloud Computing for AI</li>
+                            <li>Time Series Analysis</li>
+                            <li>Optimization Methods</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Research & Application</h4>
+                        <ul class="syllabus-list">
+                            <li>Research Methodology</li>
+                            <li>AI Ethics and Governance</li>
+                            <li>Industry Applications of ML</li>
+                            <li>Thesis Project</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'phd-robotics-ai': {
+                title: 'PhD in Robotics & AI - Syllabus',
+                content: `
+                    <div class="syllabus-section">
+                        <h4>Core Research Areas</h4>
+                        <ul class="syllabus-list">
+                            <li>Robot Perception and Sensing</li>
+                            <li>Motion Planning and Control</li>
+                            <li>Human-Robot Interaction</li>
+                            <li>Autonomous Systems</li>
+                            <li>Robot Learning</li>
+                            <li>Multi-Robot Systems</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Advanced Topics</h4>
+                        <ul class="syllabus-list">
+                            <li>Computer Vision for Robotics</li>
+                            <li>Reinforcement Learning in Robotics</li>
+                            <li>Robot Manipulation and Grasping</li>
+                            <li>Field Robotics</li>
+                            <li>Soft Robotics</li>
+                            <li>Bio-inspired Robotics</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Research Methodology</h4>
+                        <ul class="syllabus-list">
+                            <li>Research Design and Proposal Writing</li>
+                            <li>Experimental Methods in Robotics</li>
+                            <li>Statistical Analysis for Robotics Research</li>
+                            <li>Scientific Writing and Publication</li>
+                            <li>Research Ethics</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Dissertation</h4>
+                        <ul class="syllabus-list">
+                            <li>Literature Review</li>
+                            <li>Research Proposal Defense</li>
+                            <li>Original Research Contribution</li>
+                            <li>Thesis Writing and Defense</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'ma-ai-ethics': {
+                title: 'MA in AI Ethics & Policy - Syllabus',
+                content: `
+                    <div class="syllabus-section">
+                        <h4>Foundation Courses</h4>
+                        <ul class="syllabus-list">
+                            <li>Introduction to AI Ethics</li>
+                            <li>Philosophical Foundations of Ethics</li>
+                            <li>Social and Political Philosophy</li>
+                            <li>Technology and Society</li>
+                            <li>Research Methods in Ethics</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Core Ethics Modules</h4>
+                        <ul class="syllabus-list">
+                            <li>AI Fairness and Bias</li>
+                            <li>Privacy and Data Ethics</li>
+                            <li>Accountability and Transparency</li>
+                            <li>AI Safety and Control</li>
+                            <li>Human Rights and AI</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Policy and Governance</h4>
+                        <ul class="syllabus-list">
+                            <li>AI Policy and Regulation</li>
+                            <li>International AI Governance</li>
+                            <li>AI Standards and Certification</li>
+                            <li>Ethical AI Design and Implementation</li>
+                            <li>AI Impact Assessment</li>
+                        </ul>
+                    </div>
+                    <div class="syllabus-section">
+                        <h4>Applied Ethics</h4>
+                        <ul class="syllabus-list">
+                            <li>Case Studies in AI Ethics</li>
+                            <li>Ethics in AI Development</li>
+                            <li>AI in Public Sector</li>
+                            <li>Corporate AI Responsibility</li>
+                            <li>Capstone Project</li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        // Open syllabus modal
+        viewSyllabusBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const courseId = btn.getAttribute('data-course');
+                
+                if (courseSyllabus[courseId]) {
+                    modalTitle.textContent = courseSyllabus[courseId].title;
+                    modalBody.innerHTML = courseSyllabus[courseId].content;
+                    syllabusModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            syllabusModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === syllabusModal) {
+                syllabusModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Free course enrollment
+        document.querySelectorAll('.btn-free').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const courseTitle = btn.closest('.course-card').querySelector('h3').textContent;
+                alert(`Thank you for your interest in "${courseTitle}"! You have been enrolled in this free course. Check your email for access instructions.`);
+            });
+        });
+    </script>
+</body>
+</html>
